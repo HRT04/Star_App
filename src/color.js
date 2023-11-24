@@ -14,7 +14,7 @@ const Color_process = {
     // Hueヒストグラムの計算
     const hist = new cv.Mat();
     const histSize = [180]; // ヒストグラムのサイズ
-    const ranges = [0, 180]; // ヒストグラムの値の範
+    const ranges = [0, 180]; // ヒストグラムの値の範囲
     const channels = [0];
     cv.calcHist(srcVec, channels, new cv.Mat(), hist, histSize, ranges, false);
 
