@@ -12,9 +12,6 @@ function onOpenCvReady() {
   const processedImage = document.getElementById("processed-image");
   const imageOverlay = document.getElementById("image-overlay");
 
-  // color.jsを読み込んだか判別
-  let col_Load = false;
-
   // カメラの映像取得
   navigator.mediaDevices
     .getUserMedia({ video: { facingMode: { exact: "environment" } } })
@@ -111,7 +108,7 @@ function onOpenCvReady() {
     processedImage.src = capturedImage;
     processedImage.style.display = "block";
 
-    // キャンバスから画像データを取得
+    // キャンバスから切り取った画像データを取得
     const capturedImageData = ctx2.getImageData(
       0,
       0,
@@ -119,38 +116,19 @@ function onOpenCvReady() {
       objectHeight
     );
 
-    // OpenCVのMat形式に変換
+    // 切り取った画像をOpenCVのMat形式に変換
     const img_mat = cv.matFromImageData(capturedImageData);
 
-    // mat形式の画像のsize
+    // Mat形式の画像のsize
     console.log(img_mat.cols, img_mat.rows);
 
-    // 1度目の読み込み
-    if (!col_Load) {
-      // 外部ファイル (color.js) を読み込む
-      const script2 = document.createElement("script");
-      // color.js のパスを指定 (自身の格納場所の絶対パスに書き換える...{相対パスで出来るようにしたい})
-      script2.src = "./color.js";
-      // HTMLに追加
-      document.head.appendChild(script2);
+    // color.jsのColor_processを使用 (引数 : img_mat)
+    Color_process.setValue(img_mat);
+    // getValue()で値を取得
+    const result = Color_process.getValue();
+    // console表示
+    console.log("Received value:", result);
 
-      // 外部ファイルが読み込まれた後に処理を実行
-      script2.onload = function () {
-        // color.jsのColor_processへimg_matを使用
-        Color_process.setValue(img_mat);
-        // getValue()で値を取得
-        const result = Color_process.getValue();
-        // console表示
-        console.log("Received value:", result);
-        col_Load = true;
-      };
-    } else {
-      // 2回目以降
-      Color_process.setValue(img_mat);
-      const result = Color_process.getValue();
-      console.log("Received value:", result);
-    }
-
-    console.log("commit_2");
+    console.log("commit_3");
   });
 }
