@@ -3,6 +3,7 @@ script.setAttribute("async", "");
 script.setAttribute("onload", "onOpenCvReady();");
 script.setAttribute("src", "https://docs.opencv.org/master/opencv.js");
 document.head.appendChild(script);
+console.log("commit_5");
 
 function onOpenCvReady() {
   const cv = window.cv;
@@ -31,8 +32,8 @@ function onOpenCvReady() {
         const videoHeight = videoElement.clientHeight;
 
         // 枠線の領域を指定(キャプチャ範囲のobjectWidt,objectHeightの2倍の範囲に設定する)
-        const objectWidth = 400;
-        const objectHeight = 400;
+        const objectWidth = 200;
+        const objectHeight = 200;
 
         // 切り取る領域の左上座標を計算
         const startX = (videoWidth - objectWidth) / 2;
@@ -73,8 +74,8 @@ function onOpenCvReady() {
     const videoHeight = videoElement.videoHeight;
 
     // キャプチャした画像の領域を指定
-    const objectWidth = 200;
-    const objectHeight = 200;
+    const objectWidth = 100;
+    const objectHeight = 100;
 
     // 切り取る領域の左上座標を計算
     const startX = (videoWidth - objectWidth) / 2;
@@ -128,7 +129,5 @@ function onOpenCvReady() {
     const result = Color_process.getValue();
     // console表示
     console.log("Received value:", result);
-
-    console.log("commit_4");
   });
 }
