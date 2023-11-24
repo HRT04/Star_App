@@ -130,7 +130,7 @@ function onOpenCvReady() {
       // 外部ファイル (color.js) を読み込む
       const script2 = document.createElement("script");
       // color.js のパスを指定 (自身の格納場所の絶対パスに書き換える...{相対パスで出来るようにしたい})
-      script2.src = "/Users/a/AR/Star_app/src/color.js";
+      script2.src = "./color.js";
       // HTMLに追加
       document.head.appendChild(script2);
 
@@ -150,5 +150,7 @@ function onOpenCvReady() {
       const result = Color_process.getValue();
       console.log("Received value:", result);
     }
+
+    console.log("commit_2");
   });
 }
