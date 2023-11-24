@@ -120,7 +120,7 @@ function onOpenCvReady() {
     const img_mat = cv.matFromImageData(capturedImageData);
 
     // Mat形式の画像のsize
-    console.log(img_mat.cols, img_mat.rows);
+    console.log(`row:${img_mat.rows}, col:${img_mat.cols}`);
 
     // color.jsのColor_processを使用 (引数 : img_mat)
     Color_process.setValue(img_mat);
@@ -129,6 +129,6 @@ function onOpenCvReady() {
     // console表示
     console.log("Received value:", result);
 
-    console.log("commit_3");
+    console.log("commit_4");
   });
 }
