@@ -3,7 +3,7 @@ script.setAttribute("async", "");
 script.setAttribute("onload", "onOpenCvReady();");
 script.setAttribute("src", "https://docs.opencv.org/master/opencv.js");
 document.head.appendChild(script);
-console.log("commit_9");
+console.log("commit_10");
 
 function onOpenCvReady() {
   const cv = window.cv;
@@ -31,9 +31,9 @@ function onOpenCvReady() {
         const videoWidth = videoElement.clientWidth;
         const videoHeight = videoElement.clientHeight;
 
-        // 枠線の領域を指定
-        const objectWidth = 270;
-        const objectHeight = 270;
+        // 枠線の領域を指定 (キャプチャする画像の領域の0.9倍の範囲にする)
+        const objectWidth = 180;
+        const objectHeight = 180;
 
         // 切り取る領域の左上座標を計算
         const startX = (videoWidth - objectWidth) / 2;
@@ -67,15 +67,29 @@ function onOpenCvReady() {
     ctx1.beginPath();
     ctx1.strokeRect(stX, stY, ojW, ojH);
   }
+  // resultの画面表示関数
+  function dspResult(result) {
+    const r_Display = document.getElementById("result-display");
+
+    // 辞書の内容を文字列に整形して表示
+    let dspText = "<ul>"; // 箇条書きリストを作成
+    for (const r_key in result) {
+      dspText += `<li>${r_key}: ${result[r_key]}</li>`;
+    }
+    dspText += "</ul>";
+
+    // HTML上に結果を表示
+    r_Display.innerHTML = dspText;
+  }
 
   // キャプチャボタンのクリックイベント
   captureButton.addEventListener("click", () => {
     const videoWidth = videoElement.videoWidth;
     const videoHeight = videoElement.videoHeight;
 
-    // キャプチャした画像の領域を指定
-    const objectWidth = 300;
-    const objectHeight = 300;
+    // キャプチャする画像の領域を指定
+    const objectWidth = 200;
+    const objectHeight = 200;
 
     // 切り取る領域の左上座標を計算
     const startX = (videoWidth - objectWidth) / 2;
@@ -129,5 +143,8 @@ function onOpenCvReady() {
     const result = Color_process.getValue();
     // console表示
     console.log("Received value:", result);
+
+    // displayResult関数を呼び出してresultを表示
+    dspResult(result);
   });
 }
