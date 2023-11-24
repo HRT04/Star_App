@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <style>
+    /* HTMLドキュメント全体 */
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* videoの表示領域制御 */
+    #ar-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      /* 最後面 */
+      z-index: -2;
+    }
+
+    /* video要素自体 */
+    #video-element {
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* ボタン */
+    #capture-button {
+      font-size: 20px;
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 30px 50px;
+      background-color: #3498db;
+      color: black;
+      border: none;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    /* キャプチャした画像 */
+    #processed-image {
+      position: fixed;
+      bottom: 0;
+      left: 10%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      /* 最前面 */
+      z-index: 2;
+      display: none;
+    }
+  </style>
+  <body>
+    <div id="app"></div>
+    <!-- Add an img element to display the image -->
+    <!-- <img src="./src/assets/images/black6.png" id="imageInput" style="display: none;"> -->
+    <!-- Add a canvas element for processing and displaying the image -->
+    <!-- <canvas id="canvasOutput"></canvas> -->
+    <div id="ar-container">
+      <video id="video-element" autoplay playsinline></video>
+    </div>
+    <button id="capture-button">BUTTON</button>
+    <canvas id="image-overlay"></canvas>
+    <img id="processed-image" />
+    <script type="module" src="/src/main.ts"></script>
+    <script src="./src/camera.js"></script>
+    <!-- <script src="./src/color.js"></script> -->
+  </body>
+</html>
