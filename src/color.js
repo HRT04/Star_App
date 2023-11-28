@@ -67,13 +67,13 @@ const Color_process = {
     // modeValueが30以下の時には黒, modeValueが30以上でmodeSatuが20以下の時は白
     // それ以外は
 
-    // canvasに表示
+    // canvasに表・示
     // cv.imshow(canvas, image);
 
     const Return_data = {
-      modeHue: this.modeHue * 2,
-      modeSatu: this.modeSatu,
-      modeValue: this.modeValue,
+      modeHue: this.modeHue * 2, // 色相
+      modeSatu: this.modeSatu, // 彩度
+      modeValue: this.modeValue, // 明度
     };
 
     return Return_data;
