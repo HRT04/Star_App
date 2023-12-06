@@ -3,7 +3,7 @@ script.setAttribute("async", "");
 script.setAttribute("onload", "onOpenCvReady();");
 script.setAttribute("src", "https://docs.opencv.org/master/opencv.js");
 document.head.appendChild(script);
-console.log("commit_14");
+console.log("commit_15");
 
 function onOpenCvReady() {
   const cv = window.cv;
@@ -31,7 +31,7 @@ function onOpenCvReady() {
         const videoWidth = videoElement.clientWidth;
         const videoHeight = videoElement.clientHeight;
 
-        // 枠線の領域を指定 (キャプチャする画像の領域の0.9倍の範囲にする)
+        // 枠線の領域を指定 (キャプチャする画像の領域×0.9倍の範囲にする)
         const objectWidth = 180;
         const objectHeight = 180;
 
@@ -137,10 +137,8 @@ function onOpenCvReady() {
     // Mat形式の画像のsize
     console.log(`row:${img_mat.rows}, col:${img_mat.cols}`);
 
-    // color.jsのColor_processを使用 (引数 : img_mat)
-    Color_process.setValue(img_mat);
-    // getValue()で値を取得
-    const result = Color_process.getValue();
+    // color.jsのColor_processを使用して処理結果を取得 (引数 : img_mat)
+    const result = Color_process.processValue(img_mat);
     // console表示
     console.log("Received value:", result);
 

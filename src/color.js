@@ -2,8 +2,7 @@
 // mat_dataには切り取った画像をmat形式に変換したデータが引数として渡される
 
 const Color_process = {
-  value: null,
-  setValue: function (mat_data) {
+  processValue: function (mat_data) {
     const hsv = new cv.Mat();
     cv.cvtColor(mat_data, hsv, cv.COLOR_RGB2HSV_FULL);
     // console.log(hsv);
@@ -19,7 +18,7 @@ const Color_process = {
     cv.calcHist(srcVec, channels, new cv.Mat(), hist, histSize, ranges, false);
 
     var maxIdx = hist.data32F.indexOf(Math.max(...hist.data32F));
-    this.modeHue = maxIdx;
+    const modeHue = maxIdx;
 
     // Saturationヒストグラムの計算
     const hist2 = new cv.Mat();
@@ -37,7 +36,7 @@ const Color_process = {
     );
 
     var maxIdy = hist2.data32F.indexOf(Math.max(...hist2.data32F));
-    this.modeSatu = maxIdy;
+    const modeSatu = maxIdy;
 
     // Valueヒストグラムの計算
     const hist3 = new cv.Mat();
@@ -55,15 +54,14 @@ const Color_process = {
     );
     // Release memory
     var maxIdz = hist3.data32F.indexOf(Math.max(...hist3.data32F));
-    this.modeValue = maxIdz;
+    const modeValue = maxIdz;
 
     // Release memory
     mat_data.delete();
     hsv.delete();
     hist.delete();
     hist2.delete();
-  },
-  getValue: function () {
+
     // modeValueが30以下の時には黒, modeValueが30以上でmodeSatuが20以下の時は白
     // それ以外は
 
@@ -71,11 +69,10 @@ const Color_process = {
     // cv.imshow(canvas, image);
 
     const Return_data = {
-      modeHue: this.modeHue * 2, // 色相
-      modeSatu: this.modeSatu, // 彩度
-      modeValue: this.modeValue, // 明度
+      modeHue: modeHue * 2, // 色相
+      modeSatu: modeSatu, // 彩度
+      modeValue: modeValue, // 明度
     };
-
     return Return_data;
   },
 };
