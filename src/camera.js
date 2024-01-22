@@ -67,6 +67,51 @@ function onOpenCvReady() {
     ctx1.beginPath();
     ctx1.strokeRect(stX, stY, ojW, ojH);
   }
+  function dspResult2(result) {
+    const re = document.createElement("canvas");
+    re.width = 200; // 切り取る領域の幅
+    re.height = 200; // 切り取る領域の高さ
+    const re_ctx = re.getContext("2d");
+    if (re_ctx) {
+      re_ctx.font = "30px Arial"; // フォントサイズとフォントファミリーを指定
+      re_ctx.fillStyle = "black"; // テキストの色を指定
+      re_ctx.textAlign = "center"; // テキストの水平揃えを指定
+      re_ctx.textBaseline = "middle";
+      re_ctx.fillText(result, re.width / 2, re.height / 2); // テキストを描画
+      re.style.position = "absolute";
+      re.style.left = "0";
+      re.style.top = "0";
+      re.style.zIndex = "11";
+      document.body.appendChild(re);
+    }
+  }
+  function Color_divide(H, S, V) {
+    /* 黒 */
+    if (V <= 80) {
+      return "Img_Colors.Black";
+      /* 白 */
+    } else if (S <= 30) {
+      return "Img_Colors.White";
+      /* 赤 */
+    } else if (H < 23 || 165 < H) {
+      return "Img_Colors.Red";
+      //   /* オレンジ */
+      // } else if (H < 23) {
+      //   return "Img_Colors.Orange";
+      /* 黄色 */
+    } else if (H < 46) {
+      return "Img_Colors.Yellow";
+      /* 緑 */
+    } else if (H < 76) {
+      return "Img_Colors.Green";
+      /* 青 */
+    } else if (H < 128) {
+      return "Img_Colors.Brue";
+      /* 紫 */
+    } else {
+      return "Img_Colors.Purple";
+    }
+  }
   // resultの画面表示関数
   function dspResult(result) {
     const r_Display = document.getElementById("result-display");
@@ -143,6 +188,7 @@ function onOpenCvReady() {
     console.log("Received value:", result);
 
     // displayResult関数を呼び出してresultを表示
-    dspResult(result);
+    mozi = Color_divide(result.modeHue, result.modeSatu, result.modeValue);
+    dspResult2(mozi);
   });
 }
