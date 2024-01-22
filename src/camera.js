@@ -3,7 +3,7 @@ script.setAttribute("async", "");
 script.setAttribute("onload", "onOpenCvReady();");
 script.setAttribute("src", "https://docs.opencv.org/master/opencv.js");
 document.head.appendChild(script);
-console.log("commit_15");
+console.log("COMMIT3");
 
 function onOpenCvReady() {
   const cv = window.cv;
