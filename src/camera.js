@@ -3,7 +3,7 @@ script.setAttribute("async", "");
 script.setAttribute("onload", "onOpenCvReady();");
 script.setAttribute("src", "https://docs.opencv.org/master/opencv.js");
 document.head.appendChild(script);
-console.log("COMMIT4");
+console.log("COMMIT5");
 
 function onOpenCvReady() {
   const cv = window.cv;
@@ -68,6 +68,7 @@ function onOpenCvReady() {
     ctx1.strokeRect(stX, stY, ojW, ojH);
   }
   function dspResult2(result, re, re_ctx) {
+    re_ctx.clearRect(0, 0, re.width, re.height);
     if (re_ctx) {
       re_ctx.font = "30px Arial"; // フォントサイズとフォントファミリーを指定
       re_ctx.fillStyle = "black"; // テキストの色を指定
