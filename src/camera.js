@@ -3,7 +3,7 @@ script.setAttribute("async", "");
 script.setAttribute("onload", "onOpenCvReady();");
 script.setAttribute("src", "https://docs.opencv.org/master/opencv.js");
 document.head.appendChild(script);
-console.log("COMMIT7");
+console.log("COMMIT8");
 
 function onOpenCvReady() {
   const cv = window.cv;
@@ -72,7 +72,6 @@ function onOpenCvReady() {
     re.width = 200; // 切り取る領域の幅
     re.height = 200; // 切り取る領域の高さ
     const re_ctx = re.getContext("2d");
-    re.clearRect(0, 0, re.width, re.height);
 
     re_ctx.clearRect(0, 0, re.width, re.height);
 
