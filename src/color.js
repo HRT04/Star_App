@@ -10,7 +10,7 @@ const Color_process = {
     cv.GaussianBlur(
       mat_data,
       smooth_data,
-      new cv.Size(7, 7),
+      new cv.Size(9, 9),
       0,
       0,
       cv.BORDER_DEFAULT
@@ -18,7 +18,7 @@ const Color_process = {
 
     // コントラスト強調
     const contrast_data = new cv.Mat();
-    cv.convertScaleAbs(smooth_data, contrast_data, 2.0, 0);
+    cv.convertScaleAbs(smooth_data, contrast_data, 4.0, 0);
     // console.log(hsv);
     cv.cvtColor(contrast_data, hsv, cv.COLOR_RGB2HSV_FULL);
 

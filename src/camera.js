@@ -3,7 +3,7 @@ script.setAttribute("async", "");
 script.setAttribute("onload", "onOpenCvReady();");
 script.setAttribute("src", "https://docs.opencv.org/master/opencv.js");
 document.head.appendChild(script);
-console.log("COMMIT9");
+console.log("COMMIT10");
 const re = document.createElement("canvas");
 re.width = 200; // 切り取る領域の幅
 re.height = 200; // 切り取る領域の高さ
@@ -92,7 +92,7 @@ function onOpenCvReady() {
     if (V <= 80) {
       return "Img_Colors.Black";
       /* 白 */
-    } else if (S <= 30) {
+    } else if (S <= 20) {
       return "Img_Colors.White";
       /* 赤 */
     } else if (H < 23 || 165 < H) {
