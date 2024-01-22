@@ -3,7 +3,7 @@ script.setAttribute("async", "");
 script.setAttribute("onload", "onOpenCvReady();");
 script.setAttribute("src", "https://docs.opencv.org/master/opencv.js");
 document.head.appendChild(script);
-console.log("COMMIT5");
+console.log("COMMIT6");
 
 function onOpenCvReady() {
   const cv = window.cv;
@@ -68,7 +68,14 @@ function onOpenCvReady() {
     ctx1.strokeRect(stX, stY, ojW, ojH);
   }
   function dspResult2(result, re, re_ctx) {
+    const re = document.createElement("canvas");
+    re.width = 200; // 切り取る領域の幅
+    re.height = 200; // 切り取る領域の高さ
+    const re_ctx = re.getContext("2d");
+    re.clearRect(0, 0, re.width, re.height);
+
     re_ctx.clearRect(0, 0, re.width, re.height);
+
     if (re_ctx) {
       re_ctx.font = "30px Arial"; // フォントサイズとフォントファミリーを指定
       re_ctx.fillStyle = "black"; // テキストの色を指定
@@ -142,11 +149,6 @@ function onOpenCvReady() {
     canvas.width = objectWidth; // 切り取る領域の幅
     canvas.height = objectHeight; // 切り取る領域の高さ
     const ctx2 = canvas.getContext("2d");
-
-    const re = document.createElement("canvas");
-    re.width = 200; // 切り取る領域の幅
-    re.height = 200; // 切り取る領域の高さ
-    const re_ctx = re.getContext("2d");
 
     // キャンバス初期化
     ctx2.beginPath();
