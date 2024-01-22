@@ -4,8 +4,23 @@
 const Color_process = {
   processValue: function (mat_data) {
     const hsv = new cv.Mat();
-    cv.cvtColor(mat_data, hsv, cv.COLOR_RGB2HSV_FULL);
+
+    // 平滑化処理
+    const smooth_data = new cv.Mat();
+    cv.GaussianBlur(
+      mat_data,
+      smooth_data,
+      new cv.Size(7, 7),
+      0,
+      0,
+      cv.BORDER_DEFAULT
+    );
+
+    // コントラスト強調
+    const contrast_data = new cv.Mat();
+    cv.convertScaleAbs(smooth_data, contrast_data, 2.0, 0);
     // console.log(hsv);
+    cv.cvtColor(contrast_data, hsv, cv.COLOR_RGB2HSV_FULL);
 
     let srcVec = new cv.MatVector();
     srcVec.push_back(hsv);
@@ -17,7 +32,7 @@ const Color_process = {
     const channels = [0];
     cv.calcHist(srcVec, channels, new cv.Mat(), hist, histSize, ranges, false);
 
-    var maxIdx = hist.data32F.indexOf(Math.max(...hist.data32F));
+    let maxIdx = hist.data32F.indexOf(Math.max(...hist.data32F));
     const modeHue = maxIdx;
 
     // Saturationヒストグラムの計算
@@ -35,7 +50,7 @@ const Color_process = {
       false
     );
 
-    var maxIdy = hist2.data32F.indexOf(Math.max(...hist2.data32F));
+    let maxIdy = hist2.data32F.indexOf(Math.max(...hist2.data32F));
     const modeSatu = maxIdy;
 
     // Valueヒストグラムの計算
@@ -53,20 +68,15 @@ const Color_process = {
       false
     );
     // Release memory
-    var maxIdz = hist3.data32F.indexOf(Math.max(...hist3.data32F));
+    let maxIdz = hist3.data32F.indexOf(Math.max(...hist3.data32F));
     const modeValue = maxIdz;
 
     // Release memory
     mat_data.delete();
+    smooth_data.delete();
     hsv.delete();
     hist.delete();
     hist2.delete();
-
-    // modeValueが30以下の時には黒, modeValueが30以上でmodeSatuが20以下の時は白
-    // それ以外は
-
-    // canvasに表・示
-    // cv.imshow(canvas, image);
 
     const Return_data = {
       modeHue: modeHue * 2, // 色相
