@@ -3,7 +3,7 @@ script.setAttribute("async", "");
 script.setAttribute("onload", "onOpenCvReady();");
 script.setAttribute("src", "https://docs.opencv.org/master/opencv.js");
 document.head.appendChild(script);
-console.log("COMMIT3");
+console.log("COMMIT4");
 
 function onOpenCvReady() {
   const cv = window.cv;
@@ -67,11 +67,7 @@ function onOpenCvReady() {
     ctx1.beginPath();
     ctx1.strokeRect(stX, stY, ojW, ojH);
   }
-  function dspResult2(result) {
-    const re = document.createElement("canvas");
-    re.width = 200; // 切り取る領域の幅
-    re.height = 200; // 切り取る領域の高さ
-    const re_ctx = re.getContext("2d");
+  function dspResult2(result, re, re_ctx) {
     if (re_ctx) {
       re_ctx.font = "30px Arial"; // フォントサイズとフォントファミリーを指定
       re_ctx.fillStyle = "black"; // テキストの色を指定
@@ -146,6 +142,11 @@ function onOpenCvReady() {
     canvas.height = objectHeight; // 切り取る領域の高さ
     const ctx2 = canvas.getContext("2d");
 
+    const re = document.createElement("canvas");
+    re.width = 200; // 切り取る領域の幅
+    re.height = 200; // 切り取る領域の高さ
+    const re_ctx = re.getContext("2d");
+
     // キャンバス初期化
     ctx2.beginPath();
     // キャプチャした画像をクロップして描画
@@ -189,6 +190,6 @@ function onOpenCvReady() {
 
     // displayResult関数を呼び出してresultを表示
     mozi = Color_divide(result.modeHue, result.modeSatu, result.modeValue);
-    dspResult2(mozi);
+    dspResult2(mozi, re, re_ctx);
   });
 }
