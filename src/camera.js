@@ -3,7 +3,11 @@ script.setAttribute("async", "");
 script.setAttribute("onload", "onOpenCvReady();");
 script.setAttribute("src", "https://docs.opencv.org/master/opencv.js");
 document.head.appendChild(script);
-console.log("COMMIT8");
+console.log("COMMIT9");
+const re = document.createElement("canvas");
+re.width = 200; // 切り取る領域の幅
+re.height = 200; // 切り取る領域の高さ
+const re_ctx = re.getContext("2d");
 
 function onOpenCvReady() {
   const cv = window.cv;
@@ -67,12 +71,7 @@ function onOpenCvReady() {
     ctx1.beginPath();
     ctx1.strokeRect(stX, stY, ojW, ojH);
   }
-  function dspResult2(result) {
-    const re = document.createElement("canvas");
-    re.width = 200; // 切り取る領域の幅
-    re.height = 200; // 切り取る領域の高さ
-    const re_ctx = re.getContext("2d");
-
+  function dspResult2(result, re, re_ctx) {
     re_ctx.clearRect(0, 0, re.width, re.height);
 
     if (re_ctx) {
@@ -192,6 +191,6 @@ function onOpenCvReady() {
 
     // displayResult関数を呼び出してresultを表示
     mozi = Color_divide(result.modeHue, result.modeSatu, result.modeValue);
-    dspResult2(mozi);
+    dspResult2(mozi, re, re_ctx);
   });
 }
